@@ -2,6 +2,7 @@ import React from "react";
 
 import { Container, MenuContainer, MenuItemLink, Title } from "./styles";
 import { FaUserAlt, FaList, FaShoppingCart } from "react-icons/fa";
+import {Link} from 'react-router-dom';
 import { MdDashboard } from "react-icons/md";
 
 const Aside: React.FC = () => {
@@ -9,22 +10,35 @@ const Aside: React.FC = () => {
     <Container>
       <Title>Teste Nexti</Title>
       <MenuContainer>
-        <MenuItemLink href="/dashboard">
+        <Link to="/dashboard">
+        <MenuItemLink>
           <MdDashboard />
           Dashboard
         </MenuItemLink>
-        <MenuItemLink href="/lista/clientes">
+        </Link>
+
+        <Link to="/lista/clientes">
+        <MenuItemLink>
           <FaUserAlt />
           Clientes
         </MenuItemLink>
-        <MenuItemLink href="/lista/produtos">
+        </Link>
+
+        <Link to="/lista/produtos">
+        <MenuItemLink>
           <FaList />
           Produtos
         </MenuItemLink>
-        <MenuItemLink href="/lista/pedidos">
+        </Link>
+
+        <Link to="/lista/pedidos">
+        <MenuItemLink>
           <FaShoppingCart />
           Pedidos
         </MenuItemLink>
+        </Link>
+
+
       </MenuContainer>
     </Container>
   );

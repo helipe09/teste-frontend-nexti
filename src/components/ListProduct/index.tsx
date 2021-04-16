@@ -9,14 +9,16 @@ interface IListProductProps {
 
 const ListProduct: React.FC<IListProductProps> = ({ nome, preco }) => {
   return (
-    <Container>
-      <FirstData>
-        <span>Nome: {nome}</span>
-      </FirstData>
-      <h3>R${preco}</h3>
-      <Button>Editar</Button>
-      <Button>Excluir</Button>
-    </Container>
+    <>
+      <Container>
+        <FirstData>
+          <span>Nome: {nome}</span>
+        </FirstData>
+        <h3>R${preco}</h3>
+        <Button>Editar</Button>
+        <Button>Excluir</Button>
+      </Container>
+    </>
   );
 };
 
