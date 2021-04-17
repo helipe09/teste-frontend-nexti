@@ -18,8 +18,7 @@ React Switch
 
 Para rodar em servidor local, na pasta raiz do projeto, abra o terminal e digite os comandos:
 
-npm start
-yarn start
+npm start ou yarn start
 
 
 
