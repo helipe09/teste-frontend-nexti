@@ -1,6 +1,6 @@
 Teste Nexti Frontend Jr. Esse é um teste de frontend Jr.
 
-## O que foi usado? Nesse projeto foi utilizado:
+## O que foi usado? 
 
 
 
