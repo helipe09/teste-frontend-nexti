@@ -8,6 +8,7 @@ export const Container = styled.li`
   align-items: center;
   padding: 0 2rem;
   border-radius: 1rem;
+  margin-top:1rem;
 `;
 
 export const FirstData = styled.div`

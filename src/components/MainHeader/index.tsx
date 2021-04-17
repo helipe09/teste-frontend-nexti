@@ -7,7 +7,7 @@ import Toggle from '../Toogle';
 const MainHeader: React.FC = () => {
   return (
     <Container>
-      <Toggle />
+      {/* <Toggle /> */}
       <Profile>
         <Welcome>Olá,</Welcome>
         <Username>Username</Username>

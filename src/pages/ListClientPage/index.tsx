@@ -1,32 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaUserPlus } from "react-icons/fa";
 import ContentHeader from "../../components/ContentHeader";
 import ListCliente from "../../components/ListClient";
 
+import ClienteService from '../../services/clienteService';
+import {useHistory} from 'react-router-dom';
+
 import ModalAddClient from "../../components/ModalAddClient";
 import { Button } from "./styles";
 
-const cliente = [
-  { nome: "Felipe", cpf: "000000000", nascimento: "25/03/02" },
-  { nome: "Joao", cpf: "025", nascimento: "25/03/04" },
-];
+interface IListClientProps {
+  nome: string[];
+  cpf: string[];
+  data_nascimento: string[];
+
+}
 
 type FormData = {
-  firstName: string;
-  lastName: string;
+  nome: string;
+  cpf: string;
+  data_nascimento: string;
 };
 
-const ListClientPage: React.FC = () => {
+const ListClientPage: React.FC<IListClientProps> = ({nome,
+  cpf,
+  data_nascimento,}) => {
   const [modal, setModal] = useState("");
+  const[clientes, setClientes] = useState<any[]>([]);
 
+  useEffect(() => {
+    ClienteService.getAll().then((results) => {
+      setClientes(results.data);
+    });
+  }, []);
+
+  const history = useHistory()
   const {
     register,
     setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const onSubmit = handleSubmit((data) => console.log(data));
+
+  const onSubmit = handleSubmit(data => ClienteService.post(data).then(()=>{
+    alert("Cliente Incluído");
+    history.push("/");
+  }));
+
   return (
     <>
       <ContentHeader title="Clientes" lineColor="#FFF">
@@ -35,12 +56,14 @@ const ListClientPage: React.FC = () => {
           Adicionar Cliente
         </Button>
       </ContentHeader>
-      {cliente.map((item) => {
+      {clientes.map((item) => {
         return (
           <ListCliente
+            key={1}
             nome={item.nome}
             cpf={item.cpf}
-            dataNascimento={item.nascimento}
+            data_nascimento={item.data_nascimento}
+            id={item.id}
           />
         );
       })}
@@ -51,17 +74,24 @@ const ListClientPage: React.FC = () => {
       >
         <form onSubmit={onSubmit}>
           <div className="form-control">
-            <label>First Name</label>
-            <input {...register("firstName", { required: true })} />
-            {errors.firstName && (
-              <span className="error">First name is required</span>
+            <label>Nome</label>
+            <input {...register("nome", { required: true })} />
+            {errors.nome && (
+              <span className="error">O nome é obrigatório</span>
             )}
           </div>
           <div className="form-control">
-            <label>Last Name</label>
-            <input {...register("lastName", { required: true })} />
-            {errors.firstName && (
-              <span className="error">Last name is required</span>
+            <label>CPF</label>
+            <input {...register("cpf", { required: true })} />
+            {errors.cpf && (
+              <span className="error">O CPF é obrigatório</span>
+            )}
+          </div>
+          <div className="form-control">
+            <label>Data de nascimento</label>
+            <input {...register("data_nascimento", { required: true })} />
+            {errors.data_nascimento && (
+              <span className="error">A data de nascimento é obrigatória</span>
             )}
           </div>
           <button className="btn" type="submit">

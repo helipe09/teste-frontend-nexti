@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { Container, FirstData, Button } from "./styles";
 import { useForm } from "react-hook-form";
 import ModalEditProduct from "../ModalEditProduct";
+import productService from "../../services/productService";
 
 interface IListProductProps {
   nome: string;
   preco: string;
+  id:number;
 }
 
 type FormData = {
@@ -14,7 +16,7 @@ type FormData = {
   lastName: string;
 };
 
-const ListProduct: React.FC<IListProductProps> = ({ nome, preco }) => {
+const ListProduct: React.FC<IListProductProps> = ({ nome, preco,id }) => {
   const [modal, setModal] = useState("");
 
   const {
@@ -24,6 +26,16 @@ const ListProduct: React.FC<IListProductProps> = ({ nome, preco }) => {
     formState: { errors },
   } = useForm<FormData>();
   const onSubmit = handleSubmit((data) => console.log(data));
+
+  function excluirProduct(id:any){
+
+    productService.delete(id).then(()=>{
+      alert("Produto Excluido");
+      // history.push("/");
+    })
+  }
+
+
   return (
     <>
       <Container>
@@ -32,7 +44,7 @@ const ListProduct: React.FC<IListProductProps> = ({ nome, preco }) => {
         </FirstData>
         <h3>R${preco}</h3>
         <Button onClick={() => setModal("active")}>Editar</Button>
-        <Button>Excluir</Button>
+        <Button onClick={() => excluirProduct(id)}>Excluir</Button>
       </Container>
       <ModalEditProduct
         className={modal}
@@ -41,17 +53,31 @@ const ListProduct: React.FC<IListProductProps> = ({ nome, preco }) => {
       >
         <form onSubmit={onSubmit}>
           <div className="form-control">
-            <label>First Name</label>
+            <label>Nome do Produto</label>
             <input {...register("firstName", { required: true })} />
             {errors.firstName && (
-              <span className="error">First name is required</span>
+              <span className="error">O nome do Produto é obrigatório</span>
             )}
           </div>
           <div className="form-control">
-            <label>Last Name</label>
+            <label>Descrição</label>
             <input {...register("lastName", { required: true })} />
             {errors.firstName && (
-              <span className="error">Last name is required</span>
+              <span className="error">A descrição do produto é obrigatória</span>
+            )}
+          </div>
+          <div className="form-control">
+            <label>Preço</label>
+            <input {...register("lastName", { required: true })} />
+            {errors.firstName && (
+              <span className="error">O preço do produto é obrigatória</span>
+            )}
+          </div>
+          <div className="form-control">
+            <label>Quantidade</label>
+            <input {...register("lastName", { required: true })} />
+            {errors.firstName && (
+              <span className="error">A quantidade do produto é obrigatória</span>
             )}
           </div>
           <button className="btn" type="submit">
