@@ -21,4 +21,7 @@ Para rodar em servidor local, na pasta raiz do projeto, abra o terminal e digite
 npm statrt
 # or
 yarn start
+
+
+
 Abra http://localhost:3000 do seu navegador para ver o resultado.
