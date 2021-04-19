@@ -15,6 +15,10 @@ class ClientService {
     return api.post('clientes', data);
   }
 
+  put(data:any) {
+    return api.put('clientes', data)
+  }
+
   delete(id:number){
     return api.delete(`clientes/${id}`)
   }

@@ -34,7 +34,7 @@ const ListProduct: React.FC<IListProductProps> = ({ nome, preco,id,sku, descrica
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const onSubmit = handleSubmit((data) => productService.post(data).then(()=>{
+  const onSubmit = handleSubmit((data) => productService.put(data).then(()=>{
     alert(`Produto ${nome} editado!`)
     history.push("/dashboard")
   }));

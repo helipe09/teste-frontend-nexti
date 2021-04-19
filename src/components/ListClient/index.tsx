@@ -37,7 +37,7 @@ const ListClient: React.FC<IListClientProps> = ({
   const history = useHistory()
 
   const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const onSubmit = handleSubmit(data => ClienteService.post(data).then(()=>{
+  const onSubmit = handleSubmit(data => ClienteService.put(data).then(()=>{
     alert(`Cliente ${nome} editado`)
     history.push("/dashboard")
   }));
