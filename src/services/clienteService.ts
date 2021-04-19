@@ -7,12 +7,16 @@ class ClientService {
     return api.get("clientes");
   }
 
-  post(data: any) {
-    return api.post('novoCliente', data);
+  getOne(id:number) {
+    return api.get(`clientes/${id}`);
   }
 
-  delete(id:any){
-    return api.delete(`cliente/${id}`)
+  post(data: any) {
+    return api.post('clientes', data);
+  }
+
+  delete(id:number){
+    return api.delete(`clientes/${id}`)
   }
 
 }

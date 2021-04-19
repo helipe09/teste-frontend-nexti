@@ -4,6 +4,7 @@ import ContentHeader from "../../components/ContentHeader";
 import ListProduct from "../../components/ListProduct";
 
 import ModalAddProduct from "../../components/ModalAddProduct";
+import {useHistory} from 'react-router-dom';
 import ProductService from '../../services/productService';
 
 import { FaPlus } from "react-icons/fa";
@@ -27,8 +28,8 @@ const ListProductPage: React.FC = () => {
     });
   }, []);
 
-  console.log(produtos)
 
+  const history = useHistory()
   const {
     register,
     setValue,
@@ -38,6 +39,7 @@ const ListProductPage: React.FC = () => {
 
   const onSubmit = handleSubmit(data => ProductService.post(data).then(()=>{
     alert("Produto Incluído");
+    history.push("/dashboard");
   }));
 
   return (
@@ -50,7 +52,8 @@ const ListProductPage: React.FC = () => {
       </ContentHeader>
       {produtos.map((item)=>{
         return(
-          <ListProduct nome={item.nome} preco={item.preco} id={item.id}/>
+          <ListProduct nome={item.nome} preco={item.preco} id={item.id} sku={item.sku}
+          descricao={item.descricao} quantidade={item.quantidade}/>
         )
       })}
 

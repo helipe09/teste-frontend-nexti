@@ -8,11 +8,11 @@ class ProductService {
   }
 
   post(data: any) {
-    return api.post('novoProduto', data);
+    return api.post('produtos', data);
   }
 
   delete(id:any){
-    return api.delete(`produto/${id}`)
+    return api.delete(`produtos/${id}`)
   }
 
 }

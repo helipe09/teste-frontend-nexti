@@ -45,7 +45,7 @@ const ListClientPage: React.FC<IListClientProps> = ({nome,
 
   const onSubmit = handleSubmit(data => ClienteService.post(data).then(()=>{
     alert("Cliente Incluído");
-    history.push("/");
+    history.push("/dashboard");
   }));
 
   return (
@@ -70,12 +70,12 @@ const ListClientPage: React.FC<IListClientProps> = ({nome,
       <ModalAddClient
         className={modal}
         onClick={() => setModal("")}
-        title="Título"
+        title="Adicionar Cliente"
       >
         <form onSubmit={onSubmit}>
           <div className="form-control">
             <label>Nome</label>
-            <input {...register("nome", { required: true })} />
+            <input {...register("nome", { required: true})} />
             {errors.nome && (
               <span className="error">O nome é obrigatório</span>
             )}
