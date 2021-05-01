@@ -5,7 +5,6 @@ import ModalEditClient from '../ModalEditClient';
 
 import {Link,useHistory} from 'react-router-dom';
 
-import ClienteService from "../../services/clienteService";
 
 interface IListClientProps {
   nome: string;
@@ -33,34 +32,12 @@ const ListClient: React.FC<IListClientProps> = ({
 
 }) =>  {
   const[modal, setModal] = useState("");
-  const[cliente, setCliente] = useState([]);
-  const history = useHistory()
 
   const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const onSubmit = handleSubmit(data => ClienteService.put(data).then(()=>{
-    alert(`Cliente ${nome} editado`)
-    history.push("/dashboard")
-  }));
 
 
 
 
-  // useEffect(() => {
-  //   ClienteService.getOne(id).then((results) => {
-  //     setCliente(results.data);
-  //   });
-  // }, []);
-
-
-
-
-  function excluirUser(id:any){
-
-    ClienteService.delete(id).then(()=>{
-      alert(`CLiente ${nome} excluído!`);
-      history.push("/dashboard");
-    })
-  }
 
 
   return (
@@ -72,13 +49,12 @@ const ListClient: React.FC<IListClientProps> = ({
        </FirstData>
        <h3>CPF: {cpf}</h3>
        <Button onClick={() => setModal("active")}>Editar</Button>
-       <Button onClick={() => excluirUser(id)}>Excluir</Button>
      </Container>
 
     <ModalEditClient className={modal}
         onClick={() => setModal("")}
         title="Editar Cliente">
-    <form onSubmit={onSubmit}>
+    <form >
       <div className="form-control">
         <input type="hidden"{...register("id", { required: true })}defaultValue={id}/>
         <label>Nome</label>

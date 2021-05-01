@@ -4,7 +4,6 @@ import { FaUserPlus } from "react-icons/fa";
 import ContentHeader from "../../components/ContentHeader";
 import ListCliente from "../../components/ListClient";
 
-import ClienteService from '../../services/clienteService';
 import {useHistory} from 'react-router-dom';
 
 import ModalAddClient from "../../components/ModalAddClient";
@@ -27,13 +26,11 @@ const ListClientPage: React.FC<IListClientProps> = ({nome,
   cpf,
   data_nascimento,}) => {
   const [modal, setModal] = useState("");
-  const[clientes, setClientes] = useState<any[]>([]);
 
-  useEffect(() => {
-    ClienteService.getAll().then((results) => {
-      setClientes(results.data);
-    });
-  }, []);
+
+  const Clientes = [{nome: "Felipe", cpf:"089.098.098-90", data_nascimento: "28/06/2006", id: 2},
+  {nome: "Romario", cpf:"089.098.098-90", data_nascimento: "28/06/2006", id: 2},
+  {nome: "Matheus", cpf:"089.098.098-90", data_nascimento: "28/06/2006", id: 2}]
 
   const history = useHistory()
   const {
@@ -43,20 +40,17 @@ const ListClientPage: React.FC<IListClientProps> = ({nome,
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit = handleSubmit(data => ClienteService.post(data).then(()=>{
-    alert("Cliente Incluído");
-    history.push("/dashboard");
-  }));
+
 
   return (
     <>
-      <ContentHeader title="Clientes" lineColor="#FFF">
+      <ContentHeader title="Clientes Agendados" lineColor="#FFF">
         <Button onClick={() => setModal("active")}>
           <FaUserPlus />
-          Adicionar Cliente
+          Agendar Cliente
         </Button>
       </ContentHeader>
-      {clientes.map((item) => {
+      {Clientes.map((item) => {
         return (
           <ListCliente
             key={1}
@@ -72,7 +66,7 @@ const ListClientPage: React.FC<IListClientProps> = ({nome,
         onClick={() => setModal("")}
         title="Adicionar Cliente"
       >
-        <form onSubmit={onSubmit}>
+        <form >
           <div className="form-control">
             <label>Nome</label>
             <input {...register("nome", { required: true})} />

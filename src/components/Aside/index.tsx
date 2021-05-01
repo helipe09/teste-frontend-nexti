@@ -8,7 +8,7 @@ import { MdDashboard } from "react-icons/md";
 const Aside: React.FC = () => {
   return (
     <Container>
-      <Title>Teste Nexti</Title>
+      <Title>Teste Agendamento Barbearia Romario</Title>
       <MenuContainer>
         <Link to="/dashboard">
         <MenuItemLink>
@@ -20,21 +20,7 @@ const Aside: React.FC = () => {
         <Link to="/lista/clientes">
         <MenuItemLink>
           <FaUserAlt />
-          Clientes
-        </MenuItemLink>
-        </Link>
-
-        <Link to="/lista/produtos">
-        <MenuItemLink>
-          <FaList />
-          Produtos
-        </MenuItemLink>
-        </Link>
-
-        <Link to="/lista/pedidos">
-        <MenuItemLink>
-          <FaShoppingCart />
-          Pedidos
+          Clientes Agendados
         </MenuItemLink>
         </Link>
 

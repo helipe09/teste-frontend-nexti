@@ -1,27 +1,11 @@
-import React,{useState, useEffect} from "react";
+import React from "react";
 
 import ContentHeader from "../../components/ContentHeader";
-import ProductService from '../../services/productService';
-import ClientService from '../../services/clienteService';
 
 import { Container, Content,BoxProduct } from "./styles";
 
 const Dashboard: React.FC = () => {
 
-  const[produtos,setProdutos]= useState([]);
-  const[clientes,setClientes]= useState([]);
-
-  useEffect(() => {
-    ProductService.getAll().then((results) => {
-      setProdutos(results.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    ClientService.getAll().then((results) => {
-      setClientes(results.data);
-    });
-  }, []);
 
   return (
     <Container>
@@ -30,12 +14,12 @@ const Dashboard: React.FC = () => {
       </ContentHeader>
       <Content>
         <BoxProduct>
-          <h1>Produtos Cadastrados</h1>
-          <h2>{produtos.length}</h2>
+          <h1>Clientes agendados</h1>
+          <h2>5</h2>
         </BoxProduct>
         <BoxProduct>
-          <h1>Clientes Cadastrados</h1>
-          <h2>{clientes.length}</h2>
+          <h1>Clientes atendidos</h1>
+          <h2>10</h2>
         </BoxProduct>
       </Content>
     </Container>
